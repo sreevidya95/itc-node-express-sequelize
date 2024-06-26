@@ -59,7 +59,17 @@ where f.title LIKE 'k%' or f.title LIKE 'q%';
 /*14. Insert a record to represent Mary Smith renting the movie
 ‘Academy Dinosaur’ from Mike Hillyer at Store 1 today. Then write a
 query to capture the exact row you entered into the rental table.*/
+select now() as rental_date
+		,i.inventory_id,
+		(select customer_id from customer where first_name ='Mary' and last_name = 'Smith' ) customer_id,
+        st.staff_id
+ from inventory i
+inner join film f on i.film_id=f.film_id
+inner join store s on s.store_id = i.store_id
+inner join staff st on s.manager_staff_id = st.staff_id
+where f.title = 'Academy Dinosaur' and st.first_name = 'Mike' and st.last_name = 'Hillyer'
 
 
+select * from inventory
 
 
