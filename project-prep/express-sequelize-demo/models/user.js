@@ -1,21 +1,26 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const Post = sequelize.define('Post', {
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
+  const User = sequelize.define('User',{
+    userid:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        primaryKey:true,
+        autoIncrement:true
     },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: false
+    name:{
+     type:DataTypes.STRING,
+     allowNull:false,
+    },
+    email:{
+        type:DataTypes.STRING,
+        allowNull:false,
+        unique:true,
+        validate:{
+            isEmail:true
+        }
     }
-  })
+  });
 
-  // Associations
-  Post.associate = models => {
-    Post.belongsTo(models.User)
-  }
-
-  return Post
+  return User;
 }

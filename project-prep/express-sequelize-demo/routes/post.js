@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const { Post } = require('../models')
-
+const { Sequelize } = require('sequelize')
+const sequelize = new Sequelize('test_db', 'root', 'Saibaba123456@', {
+  host: 'localhost',
+  dialect: 'mysql'
+});
+const Post = require("../models/user")(sequelize);
 // GET all posts
 router.get('/', async (req, res) => {
   try {
